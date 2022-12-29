@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import 'uno.css'
 import { getStroke } from 'perfect-freehand'
+import type { StorageLikeAsync } from '@vueuse/core'
 import { useMagicKeys } from '@vueuse/core'
+import { storage } from 'webextension-polyfill'
+import { storageColor, storageMode } from '~/logic/storage'
 
 function getSvgPathFromStroke(stroke: any) {
   if (!stroke.length)
@@ -18,12 +21,25 @@ function getSvgPathFromStroke(stroke: any) {
   return d.join(' ')
 }
 
+const { AltLeft } = useMagicKeys()
+const svgPointerEvent = ref(false)
+watch(AltLeft, (v) => {
+  if (v)
+    svgPointerEvent.value = true
+  else
+    svgPointerEvent.value = false
+})
+
 const points = ref<(number[] | {
   x: number
   y: number
   pressure?: number
 })[]>([])
 const pathData = ref('')
+const pathDataHistory = ref<{
+  path: string
+  color: string
+}[]>([])
 watch(() => points.value, () => {
   const stroke = getStroke(points.value, { size: 18, start: { taper: true } })
   pathData.value = getSvgPathFromStroke(stroke)
@@ -31,15 +47,58 @@ watch(() => points.value, () => {
   deep: true,
 })
 
-function handlePointerDown(e: PointerEvent | any) {
+watch(svgPointerEvent, (v) => {
+  pathData.value = ''
+  points.value = []
+  pathDataHistory.value = []
+})
+const storageLocal: StorageLikeAsync = {
+  removeItem(key: string) {
+    return storage.local.remove(key)
+  },
+
+  setItem(key: string, value: string) {
+    return storage.local.set({ [key]: value })
+  },
+
+  async getItem(key: string) {
+    return (await storage.local.get(key))[key]
+  },
+}
+
+const pathColor = ref(storageColor)
+const getCurrentColor = async (key: string) => {
+  await (storageLocal.getItem(key) as Promise<string | null>).then((res) => {
+    pathColor.value = res
+  })
+}
+
+// 默认是false，橡皮擦效果，直接消失。
+// true，不会消失，除非alt
+const mode = ref(storageMode)
+const getCurrentMode = async (key: string) => {
+  await (storageLocal.getItem(key) as Promise<string | null>).then((res) => {
+    mode.value = res === 'true'
+  })
+}
+
+async function handlePointerDown(e: PointerEvent | any) {
   e.target.setPointerCapture(e.pointerId)
+
+  await getCurrentColor('color')
+  await getCurrentMode('mode')
   points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
-  loop()
+
+  if (!mode.value)
+    loop()
 }
 
 function handlePointerMove(e: PointerEvent | any) {
   if (e.buttons !== 1)
     return
+  if (!svgPointerEvent.value)
+    return
+
   points.value = [...points.value, [e.clientX, e.clientY, e.pressure]]
 }
 
@@ -47,6 +106,14 @@ let timestamp = 0
 let interval = 0
 function handleUp(e: PointerEvent | any) {
   cancelAnimationFrame(interval)
+
+  if (mode.value) {
+    pathDataHistory.value.push({
+      path: pathData.value,
+      color: pathColor.value,
+    })
+  }
+
   pathData.value = ''
 }
 function loop() {
@@ -60,15 +127,6 @@ function loop() {
   }
   interval = requestAnimationFrame(loop)
 }
-
-const { AltLeft } = useMagicKeys()
-const svgPointerEvent = ref(false)
-watch(AltLeft, (v) => {
-  if (v)
-    svgPointerEvent.value = true
-  else
-    svgPointerEvent.value = false
-})
 </script>
 
 <template>
@@ -80,7 +138,15 @@ watch(AltLeft, (v) => {
     @pointermove="handlePointerMove"
     @pointerup="handleUp"
   >
-    <path :d="pathData" stroke="gray" fill="gray" />
+    <path :d="pathData" :stroke="pathColor" :fill="pathColor" />
+
+    <path
+      v-for="(item, index) in pathDataHistory"
+      :key="index"
+      :d="item.path"
+      :stroke="item.color"
+      :fill="item.color"
+    />
   </svg>
 </template>
 
