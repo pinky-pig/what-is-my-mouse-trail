@@ -13,7 +13,7 @@ function openOptionsPage() {
     <SharedSubtitle />
 
     <button class="btn mt-2" @click="openOptionsPage">
-      Open Options
+      Open Options111
     </button>
     <div class="mt-2">
       <span class="opacity-50">Storage:</span> {{ storageDemo }}
