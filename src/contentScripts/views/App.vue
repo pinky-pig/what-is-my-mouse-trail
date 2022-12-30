@@ -30,28 +30,23 @@ watch(AltLeft, (v) => {
     svgPointerEvent.value = false
 })
 
-const points = ref<(number[] | {
-  x: number
-  y: number
-  pressure?: number
-})[]>([])
-const pathData = ref('')
-const pathDataHistory = ref<{
-  path: string
-  color: string
-}[]>([])
-watch(() => points.value, () => {
-  const stroke = getStroke(points.value, { size: 18, start: { taper: true } })
-  pathData.value = getSvgPathFromStroke(stroke)
-}, {
-  deep: true,
-})
+const config_draw = {
+  size: 16,
+  smoothing: 0.5,
+  thinning: 0.5,
+  streamline: 0.5,
+  easing: (t: any) => t,
+  start: {
+    taper: 0,
+    cap: true,
+  },
+  end: {
+    taper: 0,
+    cap: true,
+  },
+}
+const config_linear = { size: 18, start: { taper: true } }
 
-watch(svgPointerEvent, (v) => {
-  pathData.value = ''
-  points.value = []
-  pathDataHistory.value = []
-})
 const storageLocal: StorageLikeAsync = {
   removeItem(key: string) {
     return storage.local.remove(key)
@@ -81,6 +76,30 @@ const getCurrentMode = async (key: string) => {
     mode.value = res === 'true'
   })
 }
+
+const points = ref<(number[] | {
+  x: number
+  y: number
+  pressure?: number
+})[]>([])
+const pathData = ref('')
+const pathDataHistory = ref<{
+  path: string
+  color: string
+}[]>([])
+watch(() => points.value, () => {
+  const config_option = mode.value ? config_draw : config_linear
+  const stroke = getStroke(points.value, config_option)
+  pathData.value = getSvgPathFromStroke(stroke)
+}, {
+  deep: true,
+})
+
+watch(svgPointerEvent, (v) => {
+  pathData.value = ''
+  points.value = []
+  pathDataHistory.value = []
+})
 
 async function handlePointerDown(e: PointerEvent | any) {
   e.target.setPointerCapture(e.pointerId)
