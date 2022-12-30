@@ -75,3 +75,8 @@ To build the extension, run
 ```bash
 pnpm build
 ```
+
+安装：（以chrome浏览器为例）
+1. 地址栏输入: `chrome://extensions/`。
+2. 打开开发者模式。
+3. 将生成的 `/extension` 文件夹直接拖拽到浏览器扩展程序页面。
