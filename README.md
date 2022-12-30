@@ -11,6 +11,7 @@
   - 📃 第一种模式是轨迹短暂跟随鼠标。第二种模式是可随意绘制。
   - 📦 取消按下坐标的ALT键，绘制的内容将被清空
 
+[使用方法](#Build)
 
 <p align="center">
 <sub>Popup</sub><br/>
@@ -70,7 +71,7 @@ pnpm dev
 
 ### Build
 
-To build the extension, run
+<p id="Build">To build the extension, run</p>
 
 ```bash
 pnpm build
