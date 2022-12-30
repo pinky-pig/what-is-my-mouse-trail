@@ -1,88 +1,53 @@
 # WebExtension Vite Starter
 
-A [Vite](https://vitejs.dev/) powered WebExtension ([Chrome](https://developer.chrome.com/docs/extensions/reference/), [FireFox](https://addons.mozilla.org/en-US/developers/), etc.) starter template.
+使用的是[@antfu](https://github.com/antfu)的仓库模板[vitesse-webext](https://github.com/antfu/vitesse-webext)进行开发。
+
+## Introduction
+
+前一段新冠阳性，居家隔离办公的时候，经常会遇到分享屏幕。但是当分享的时候，需要聚焦某一要素，简单的鼠标移动并不能让观看者很清晰直观的看到分享者的着重点。
+于是便简单开发了一款浏览器插件，显示鼠标移动轨迹。
+
+  - 💬 按住左边的ALT键，配合鼠标左键按下并在页面上滑动，即可在页面上绘制线条。
+  - 📃 第一种模式是轨迹短暂跟随鼠标。第二种模式是可随意绘制。
+  - 📦 取消按下坐标的ALT键，绘制的内容将被清空
+
 
 <p align="center">
 <sub>Popup</sub><br/>
-<img width="655" src="https://user-images.githubusercontent.com/11247099/126741643-813b3773-17ff-4281-9737-f319e00feddc.png"><br/>
-<sub>Options Page</sub><br/>
-<img width="655" src="https://user-images.githubusercontent.com/11247099/126741653-43125b62-6578-4452-83a7-bee19be2eaa2.png"><br/>
+<img width="655" src="https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/images20221230103311.png"><br/>
 <sub>Inject Vue App into the Content Script</sub><br/>
-<img src="https://user-images.githubusercontent.com/11247099/130695439-52418cf0-e186-4085-8e19-23fe808a274e.png">
+<img src="https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/images微信图片_20221230103451.png">
 </p>
 
 ## Features
 
-- ⚡️ **Instant HMR** - use **Vite** on dev (no more refresh!)
-- 🥝 Vue 3 - Composition API, [`<script setup>` syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md) and more!
-- 💬 Effortless communications - powered by [`webext-bridge`](https://github.com/antfu/webext-bridge) and [VueUse](https://github.com/antfu/vueuse) storage
-- 🌈 [UnoCSS](https://github.com/unocss/unocss) - The instant on-demand Atomic CSS engine.
-- 🦾 [TypeScript](https://www.typescriptlang.org/) - type safe
-- 📦 [Components auto importing](./src/components)
-- 🌟 [Icons](./src/components) - Access to icons from any iconset directly
-- 🖥 Content Script - Use Vue even in content script
-- 🌍 WebExtension - isomorphic extension for Chrome, Firefox, and others
-- 📃 Dynamic `manifest.json` with full type support
+- ⚡️ 鼠标轨迹跟随
+- 🥝 自由绘制
+- 🌈 颜色选择
 
 ## Pre-packed
 
 ### WebExtension Libraries
 
-- [`webextension-polyfill`](https://github.com/mozilla/webextension-polyfill) - WebExtension browser API Polyfill with types
-- [`webext-bridge`](https://github.com/antfu/webext-bridge) - effortlessly communication between contexts
-
-### Vite Plugins
-
-- [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use `browser` and Vue Composition API without importing
-- [`unplugin-vue-components`](https://github.com/antfu/vite-plugin-components) - components auto import
-- [`unplugin-icons`](https://github.com/antfu/unplugin-icons) - icons as components
-  - [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/)
-
-### Vue Plugins
-
-- [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
-
-### UI Frameworks
-
-- [UnoCSS](https://github.com/unocss/unocss) - the instant on-demand Atomic CSS engine
-
-### Coding Style
-
-- Use Composition API with [`<script setup>` SFC syntax](https://github.com/vuejs/rfcs/pull/227)
-- [ESLint](https://eslint.org/) with [@antfu/eslint-config](https://github.com/antfu/eslint-config), single quotes, no semi
-
-### Dev tools
-
-- [TypeScript](https://www.typescriptlang.org/)
-- [pnpm](https://pnpm.js.org/) - fast, disk space efficient package manager
-- [esno](https://github.com/antfu/esno) - TypeScript / ESNext node runtime powered by esbuild
-- [npm-run-all](https://github.com/mysticatea/npm-run-all) - Run multiple npm-scripts in parallel or sequential
-- [web-ext](https://github.com/mozilla/web-ext) - Streamlined experience for developing web extensions
+- [`free-hand`](https://github.com/steveruizok/perfect-freehand) - 绘制线条的笔刷样式。[笔刷调试网站](https://perfect-freehand-example.vercel.app/)
 
 ## Use the Template
 
-### GitHub Template
+### GitHub Repo
 
-[Create a repo from this template on GitHub](https://github.com/antfu/vitesse-webext/generate).
+[what-is-my-mouse-trail](https://github.com/pinky-pig/what-is-my-mouse-trail.git).
 
 ### Clone to local
 
-If you prefer to do it manually with the cleaner git history
-
-> If you don't have pnpm installed, run: npm install -g pnpm
-
-```bash
-npx degit antfu/vitesse-webext my-webext
-cd my-webext
-pnpm i
-```
+克隆仓库后，安装依赖，俺更喜欢`pnpm i`。
 
 ## Usage
 
 ### Folders
 
 - `src` - main source.
-  - `contentScript` - scripts and components to be injected as `content_script`
+  - `contentScript` - 往页面注入的`svg`，鼠标轨迹等都是通过`path`渲染到页面上。
+  - `popup` - 浏览器的`popup`弹出框页面。
   - `background` - scripts for background.
   - `components` - auto-imported Vue components that are shared in popup and options page.
   - `styles` - styles shared in popup and options page
@@ -93,23 +58,15 @@ pnpm i
   - `dist` - built files, also serve stub entry for Vite on development.
 - `scripts` - development and bundling helper scripts.
 
+
 ### Development
 
 ```bash
 pnpm dev
 ```
-
-Then **load extension in browser with the `extension/` folder**.
-
-For Firefox developers, you can run the following command instead:
-
-```bash
-pnpm start:firefox
-```
-
-`web-ext` auto reload the extension when `extension/` files changed.
-
-> While Vite handles HMR automatically in the most of the case, [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) is still recommanded for cleaner hard reloading.
+- 如果需要自定义弹出框页面样式，可以在 `popup/Popup.vue` 中修改。
+- 如果需要修改笔刷样式，可以在[`free-hand`](https://perfect-freehand-example.vercel.app/)调试好笔刷后，再将配置赋值给`contentScripts/views/App.vue` 中的`config_draw`参数。
+- 如果需要修改业务逻辑，只需关注`popup/Popup.vue`和`contentScripts/views/App.vue`这两个页面。
 
 ### Build
 
@@ -118,15 +75,3 @@ To build the extension, run
 ```bash
 pnpm build
 ```
-
-And then pack files under `extension`, you can upload `extension.crx` or `extension.xpi` to appropriate extension store.
-
-## Credits
-
-[![Volta](https://user-images.githubusercontent.com/904724/195351818-9e826ea9-12a0-4b06-8274-352743cd2047.png)](https://volta.net)
-
-This template is originally made for the [volta.net](https://volta.net) browser extension.
-
-## Variations
-
-This is a variant of [Vitesse](https://github.com/antfu/vitesse), check out the [full variations list](https://github.com/antfu/vitesse#variations).

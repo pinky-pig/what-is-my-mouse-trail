@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storageColor, storageMode } from '~/logic/storage'
-// import { storageColor, storageDemo } from '~/logic/storage'
 
 // function openOptionsPage() {
 //   browser.runtime.openOptionsPage()
@@ -9,17 +8,6 @@ import { storageColor, storageMode } from '~/logic/storage'
 
 <template>
   <main class="main w-[240px] h-[200px] text-center px-4 py-5 text-gray-700">
-    <!-- <Logo />
-    <div>Popup</div>
-    <SharedSubtitle />
-
-    <button class="btn mt-2" @click="openOptionsPage">
-      Open Options111
-    </button>
-    <div class="mt-2">
-      <span class="opacity-50">Storage:</span> {{ storageDemo }}
-    </div> -->
-
     <div class=" ml-1/2 my-30px">
       <input id="switch" v-model="storageMode" type="checkbox">
       <label class="love-heart" for="switch">
@@ -30,7 +18,7 @@ import { storageColor, storageMode } from '~/logic/storage'
       </label>
     </div>
 
-    <input v-model="storageColor" class="border-0 outline-none w-90% h-100px  cursor-pointer" type="color">
+    <input v-model="storageColor" class=" outline-none w-90% h-100px rounded-2xl cursor-pointer" type="color">
   </main>
 </template>
 
