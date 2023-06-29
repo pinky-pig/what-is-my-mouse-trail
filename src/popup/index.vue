@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  popup123456789
+  popup1
 </template>
 
 <style scoped>
