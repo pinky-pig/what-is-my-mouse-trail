@@ -100,15 +100,14 @@ export function useDraw() {
     if (e.buttons !== 1)
       return
 
-    pathDataHistory.value.push({
-      path: pathData.value,
-      color: pathColor.value,
-    })
-
     points.value = [...points.value, [e.offsetX, e.offsetY, e.pressure]]
   }
 
   function handleUp() {
+    pathDataHistory.value.push({
+      path: pathData.value,
+      color: pathColor.value,
+    })
     pathData.value = ''
   }
 
