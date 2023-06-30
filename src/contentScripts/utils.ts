@@ -18,8 +18,14 @@ export function usePressAlt() {
 }
 export function usePressCtrl() {
   const isPressCtrlAlt = ref(false)
-  const { Ctrl_AltLeft } = useMagicKeys()
+  const { Ctrl_AltLeft, Meta_AltLeft } = useMagicKeys()
   watch(Ctrl_AltLeft, (v) => {
+    if (v)
+      isPressCtrlAlt.value = true
+    else
+      isPressCtrlAlt.value = false
+  })
+  watch(Meta_AltLeft, (v) => {
     if (v)
       isPressCtrlAlt.value = true
     else
