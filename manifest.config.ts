@@ -12,7 +12,7 @@ export default defineManifest(async () => ({
   content_scripts: [
     {
       matches: ['<all_urls>'],
-      js: ['src/contentScript/index.ts'],
+      js: ['src/contentScripts/index.ts'],
     },
   ],
   background: {
