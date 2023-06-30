@@ -3,7 +3,9 @@ const text = ref('popup1')
 </script>
 
 <template>
-  {{ text }}
+  <div>
+    {{ text }}
+  </div>
 </template>
 
 <style scoped>
