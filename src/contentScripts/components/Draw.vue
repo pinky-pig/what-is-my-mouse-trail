@@ -2,7 +2,7 @@
 import { usePressCtrl } from '../utils'
 import { useDraw } from './Trail'
 
-const { isPressCtrl } = usePressCtrl()
+const { isPressCtrlAlt } = usePressCtrl()
 
 const { 
   handlePointerDown,
@@ -13,7 +13,7 @@ const {
   pathDataHistory,
 } = useDraw()
 
-watch(isPressCtrl, (newVal) => {
+watch(isPressCtrlAlt, (newVal) => {
   if (!newVal) {
     pathDataHistory.value = []
   }
@@ -21,7 +21,7 @@ watch(isPressCtrl, (newVal) => {
 </script>
 
 <template>
-  <div v-show="isPressCtrl" class="panel">
+  <div v-show="isPressCtrlAlt" class="panel">
     <svg
       class="svg-container"
       @pointerdown="handlePointerDown"
