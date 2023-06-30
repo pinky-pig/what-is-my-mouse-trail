@@ -42,6 +42,7 @@ watchEffect(() => {
 }
 .logo-name{
   position: absolute;
+  width: 100%;
   top: 30%;
   left: 66%;
   transform: translate(-50%, -50%);
