@@ -20,6 +20,9 @@ export function useMouseTail() {
 
 
   async function handlePointerDown(e: PointerEvent ) {
+    await chrome.storage.local.get(["color"]).then((res) => {
+      pathColor.value = res.color || "#3aa757"
+    })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
     points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
     loop()
@@ -99,6 +102,9 @@ export function useDraw() {
 
 
   async function handlePointerDown(e: PointerEvent ) {
+    await chrome.storage.local.get(["color"]).then((res) => {
+      pathColor.value = res.color || "#3aa757"
+    })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
     points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
   }
