@@ -6,6 +6,7 @@ specifiers:
   '@types/node': ^20.3.2
   '@vitejs/plugin-vue': ^4.1.0
   '@vueuse/core': ^10.2.1
+  perfect-freehand: ^1.2.0
   typescript: ^5.0.2
   unplugin-auto-import: ^0.16.4
   vite: ^4.3.9
@@ -21,6 +22,7 @@ devDependencies:
   '@types/node': 20.3.2
   '@vitejs/plugin-vue': 4.2.3_vite@4.3.9+vue@3.3.4
   '@vueuse/core': 10.2.1_vue@3.3.4
+  perfect-freehand: 1.2.0
   typescript: 5.1.6
   unplugin-auto-import: 0.16.4_@vueuse+core@10.2.1
   vite: 4.3.9_@types+node@20.3.2
@@ -938,6 +940,10 @@ packages:
 
   /pathe/1.1.1:
     resolution: {integrity: sha512-d+RQGp0MAYTIaDBIMmOfMwz3E+LOZnxx1HZd5R18mmCZY0QBlK0LDZfPc8FW8Ed2DlvsuE6PRjroDY+wg4+j/Q==}
+    dev: true
+
+  /perfect-freehand/1.2.0:
+    resolution: {integrity: sha512-h/0ikF1M3phW7CwpZ5MMvKnfpHficWoOEyr//KVNTxV4F6deRK1eYMtHyBKEAKFK0aXIEUK9oBvlF6PNXMDsAw==}
     dev: true
 
   /picocolors/1.0.0:
