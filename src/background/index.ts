@@ -1,4 +1,9 @@
-export const DEFAULT_COLOR = { r: 0, g: 0, b: 0, a: 1 };
+export const DEFAULT_COLOR = '#000000'
 
-
-console.log(DEFAULT_COLOR,'1111111111111111111111111111');
+chrome.runtime.onInstalled.addListener(async () => {
+  try {
+    await chrome.storage.local.set({ color: DEFAULT_COLOR });
+  } catch (err) {
+    console.warn(err);
+  }
+})

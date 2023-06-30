@@ -9,6 +9,9 @@ export function useMouseTail() {
   const points = ref<(number[] | { x: number, y: number, pressure?: number })[]>([])
   const pathData = ref('')
   const pathColor = ref('#000000')
+  chrome.storage.local.get(["color"]).then((res) => {
+    pathColor.value = res.color || "#3aa757"
+  })
 
   watch(() => points.value, () => {
     const stroke = getStroke(points.value, config_linear)
@@ -80,6 +83,10 @@ export function useDraw() {
   const points = ref<(number[] | { x: number, y: number, pressure?: number })[]>([])
   const pathData = ref('')
   const pathColor = ref('#000000')
+  chrome.storage.local.get(["color"]).then((res) => {
+    pathColor.value = res.color || "#3aa757"
+  })
+
   const pathDataHistory = ref<{
     path: string
     color: string
