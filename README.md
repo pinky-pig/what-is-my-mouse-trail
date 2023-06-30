@@ -1,4 +1,24 @@
-# WebExtension Vite Starter
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/imagesmousetrail.gif" width="600"/>
+</p>
+
+## 使用 Crx.js 重构 。详情见 refactor 分支
+
+只是一个简单的小项目，所以重构的话，也比较简单。没有使用 antfu 的模板，而是自己简单搭了一个。
+
+- [√] background
+- [√] content scripts
+- [√] popup
+- [√] options
+
+
+## 操作
+
+- 按住左边 Alt 键和鼠标左键，在页面滑动，有小尾巴跟随。松开 Alt 结束
+- 按住 Ctrl 和左边 Alt 键和鼠标左键，绘制线条。鼠标左键抬起，结束当前线条绘制。按键抬起，结束
+- Popup 页面，可以选择颜色
+
+# 旧版本
 
 使用的是[@antfu](https://github.com/antfu)的仓库模板[vitesse-webext](https://github.com/antfu/vitesse-webext)进行开发。
 
