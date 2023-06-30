@@ -23,7 +23,7 @@
 import { defineManifest } from '@crxjs/vite-plugin'
 
 export default defineManifest(async () => ({
-  name: 'Example extension',
+  name: 'What is my mouse trail',
   manifest_version: 3,
   version: '1.0.0.0',
   action: { 
