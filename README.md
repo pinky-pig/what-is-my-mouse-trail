@@ -1,6 +1,9 @@
 
-# Crx.js Vue Template
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/imagesmousetrail.gif" width="600"/>
+</p>
 
+# Crx.js Vue Template
 - [√] background
 - [√] content scripts
 - [√] popup
