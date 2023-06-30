@@ -24,7 +24,7 @@ export function useMouseTail() {
       pathColor.value = res.color || "#3aa757"
     })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
-    points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
+    points.value = [[e.offsetX, e.offsetY, e.pressure ?? 0.5]]
     loop()
   }
 
@@ -106,7 +106,7 @@ export function useDraw() {
       pathColor.value = res.color || "#3aa757"
     })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
-    points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
+    points.value = [[e.offsetX, e.offsetY, e.pressure ?? 0.5]]
   }
 
   function handlePointerMove(e: PointerEvent) {
