@@ -33,7 +33,7 @@ import { currentMode } from './components/utils';
   height: 100%;
   position: absolute;
   overflow: hidden;
-  background: #fefefe;
+  background: #F3EDE1;
   top: 0;
   bottom: 0;
   left: 0;
@@ -46,12 +46,12 @@ import { currentMode } from './components/utils';
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  border: 5px solid #b8b8b8;
+  border: 5px solid #000000;
   text-align: center;
 }
 
 .place-holder-text {
-  color: #b8b8b8;
+  color: #000000;
   font-size: 18px;
   font-style: italic;
   font-family: fantasy;
@@ -78,6 +78,7 @@ footer {
 }
 
 .footer-right {
+  color: #000000;
   cursor: pointer;
   font-size: 24px;
   font-weight: 800;
