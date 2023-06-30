@@ -20,4 +20,11 @@ export default defineManifest(async () => ({
     type: "module"
   },
   permissions: ["storage"],
+  icons: {
+    "16": "icons/favicon-16x16.png",
+    "32": "icons/favicon-32x32.png",
+    "128": "icons/favicon-128x128.png",
+    "192": "icons/favicon-192x192.png",
+    "512": "icons/favicon-512x512.png"
+  }
 }))
