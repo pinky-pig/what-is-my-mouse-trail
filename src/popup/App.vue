@@ -18,6 +18,7 @@ watchEffect(() => {
 <template>
   <main class="main" :style="{ background: color }" @click="handlePickColor">
     <p class="place-holder-text">Color Picker</p>
+    <p class="logo-name">What is my mouse trail</p>
     <input class="color-picker" ref="inputRef" v-model="color" type="color">
   </main>
 </template>
@@ -31,8 +32,18 @@ watchEffect(() => {
 }
 .place-holder-text{
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  color: #b8b8b8;
+  font-size: 18px;
+  font-style: italic;
+  font-family: fantasy;
+}
+.logo-name{
+  position: absolute;
+  top: 30%;
+  left: 66%;
   transform: translate(-50%, -50%);
   color: #b8b8b8;
   font-size: 18px;
