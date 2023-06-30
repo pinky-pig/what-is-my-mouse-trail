@@ -1,7 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { crx } from '@crxjs/vite-plugin'
-import manifest from './manifest.config'
 import AutoImport from 'unplugin-auto-import/vite'
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -10,7 +8,6 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default defineConfig({
   plugins: [
     vue(),
-    crx({ manifest }),
     AutoImport({
       imports: [ 
         'vue', 

@@ -1,5 +1,6 @@
 import { getStroke } from 'perfect-freehand'
-import { getSvgPathFromStroke } from '../utils'
+import { getSvgPathFromStroke } from './utils'
+import {currentColor} from './utils'
 /**
  * 鼠标小尾巴
  */
@@ -8,10 +9,7 @@ export function useMouseTail() {
 
   const points = ref<(number[] | { x: number, y: number, pressure?: number })[]>([])
   const pathData = ref('')
-  const pathColor = ref('#000000')
-  chrome.storage.local.get(["color"]).then((res) => {
-    pathColor.value = res.color || "#3aa757"
-  })
+  const pathColor = computed(() => currentColor.value)
 
   watch(() => points.value, () => {
     const stroke = getStroke(points.value, config_linear)
@@ -20,11 +18,8 @@ export function useMouseTail() {
 
 
   async function handlePointerDown(e: PointerEvent ) {
-    await chrome.storage.local.get(["color"]).then((res) => {
-      pathColor.value = res.color || "#3aa757"
-    })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
-    points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
+    points.value = [[e.offsetX, e.offsetY, e.pressure ?? 0.5]]
     loop()
   }
 
@@ -85,10 +80,7 @@ export function useDraw() {
   }
   const points = ref<(number[] | { x: number, y: number, pressure?: number })[]>([])
   const pathData = ref('')
-  const pathColor = ref('#000000')
-  chrome.storage.local.get(["color"]).then((res) => {
-    pathColor.value = res.color || "#3aa757"
-  })
+  const pathColor = computed(() => currentColor.value)
 
   const pathDataHistory = ref<{
     path: string
@@ -102,11 +94,8 @@ export function useDraw() {
 
 
   async function handlePointerDown(e: PointerEvent ) {
-    await chrome.storage.local.get(["color"]).then((res) => {
-      pathColor.value = res.color || "#3aa757"
-    })
     e.target && (e.target as HTMLElement).setPointerCapture(e.pointerId)
-    points.value = [[e.clientX, e.clientY, e.pressure ?? 0.5]]
+    points.value = [[e.offsetX, e.offsetY, e.pressure ?? 0.5]]
   }
 
   function handlePointerMove(e: PointerEvent) {

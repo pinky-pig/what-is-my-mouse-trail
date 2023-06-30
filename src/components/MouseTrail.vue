@@ -1,27 +1,18 @@
 <script setup lang="ts">
-import { usePressCtrl } from '../utils'
-import { useDraw } from './Trail'
-
-const { isPressCtrlAlt } = usePressCtrl()
+import { currentMode } from './utils'
+import { useMouseTail } from './Trail'
 
 const { 
   handlePointerDown,
   handlePointerMove,
   handleUp,
   pathData,
-  pathColor,
-  pathDataHistory,
-} = useDraw()
-
-watch(isPressCtrlAlt, (newVal) => {
-  if (!newVal) {
-    pathDataHistory.value = []
-  }
-})
+  pathColor
+} = useMouseTail()
 </script>
 
 <template>
-  <div v-show="isPressCtrlAlt" class="panel">
+  <div v-show="currentMode === 'MouseTrail'" class="panel">
     <svg
       class="svg-container"
       @pointerdown="handlePointerDown"
@@ -33,24 +24,11 @@ watch(isPressCtrlAlt, (newVal) => {
         :stroke="pathColor"
         :fill="pathColor"
       />
-
-      <path
-        v-for="(item, index) in pathDataHistory"
-        :key="index"
-        :d="item.path"
-        :stroke="item.color"
-        :fill="item.color"
-      />
     </svg>
   </div>
 </template>
 <style scoped>
 .panel {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -58,9 +36,6 @@ watch(isPressCtrlAlt, (newVal) => {
   pointer-events: none;
 }
 .svg-container{
-  position: absolute;
-  left: 0;
-  top: 0;
   height: 100%;
   width: 100%;
   touch-action: none;
