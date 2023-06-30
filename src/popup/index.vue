@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+const text = ref('popup1')
 </script>
 
 <template>
-  popup1
+  {{ text }}
 </template>
 
 <style scoped>

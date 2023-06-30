@@ -27,5 +27,6 @@
     "vite.config.*",
     "shims-vue.d.ts",
     "manifest.*",
+    "auto-imports.d.ts",
   ],
 }
