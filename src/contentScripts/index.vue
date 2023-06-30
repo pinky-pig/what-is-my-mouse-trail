@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { usePressAlt } from './logic'
 // https://github.com/steveruizok/perfect-freehand
 import { getStroke } from 'perfect-freehand'
 
@@ -117,10 +118,13 @@ function loop() {
   }
   interval = requestAnimationFrame(loop)
 }
+
+
+const { isPressAlt } = usePressAlt()
 </script>
 
 <template>
-  <div style="position: relative;height: 100%; width: 100%;" >
+  <div v-show="isPressAlt" class="panel">
     <svg
       style="position: absolute;left: 0; top: 0;height: 100%; width: 100%; touch-action: none;"
       :style="{ pointerEvents: svgPointerEvent ? 'auto' : 'none' }"
@@ -144,3 +148,17 @@ function loop() {
     </svg>
   </div>
 </template>
+<style scoped>
+.panel {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2147483647;
+  pointer-events: none;
+}
+</style>
