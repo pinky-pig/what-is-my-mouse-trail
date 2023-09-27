@@ -48,7 +48,7 @@
   - `contentScript` - 往页面注入的`svg`，鼠标轨迹等都是通过`path`渲染到页面上。
   - `popup` - 浏览器的`popup`弹出框页面。
   - `background` - scripts for background.
-  - `components` - auto-imported Vue components that are shared in popup and options page.
+  - `components` - auto-imported Vue components that are shared in the popup and options page.
   - `styles` - styles shared in popup and options page
   - `assets` - assets used in Vue components
   - `manifest.ts` - manifest for the extension.
