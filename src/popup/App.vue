@@ -55,5 +55,6 @@ watchEffect(() => {
   position: absolute;
   z-index: -1;
   left: 11px;
+  top: 70%;
 }
 </style>
